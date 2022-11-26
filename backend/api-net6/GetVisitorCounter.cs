@@ -17,7 +17,7 @@ public class GetVisitorCounter
 
     [Function("GetVisitorCounter")]
     public MyOutputType Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
-    [CosmosDBInput(databaseName: "CloudResume", collectionName: 
+    [CosmosDBInput(databaseName: "AzureResume", collectionName: 
     "Counter", ConnectionStringSetting = "CosmosDbConnectionString", Id = "index",
             PartitionKey = "index")] Counter counter)
     {
