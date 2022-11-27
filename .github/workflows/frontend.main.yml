@@ -25,8 +25,8 @@ jobs:
       uses: Azure/cli@1.0.4
       with:
         inlineScript: |
-          az storage file upload --account-name azresumeacct --share-name func-butterresume12c3f1b2408b --source ./backend/Counter/run.ps1 --path "site/wwwroot/Counter" --overwrite
-          az storage file upload --account-name azresumeacct --share-name func-butterresume12c3f1b2408b --source ./backend/Counter/function.json --path "site/wwwroot/Counter" --overwrite
+          az storage file upload --account-name azresumeacct --share-name func-butterresume12c3f1b2408b --source ./backend/Counter/run.ps1 --path "site/wwwroot/Counter"
+          az storage file upload --account-name azresumeacct --share-name func-butterresume12c3f1b2408b --source ./backend/Counter/function.json --path "site/wwwroot/Counter"
           
     - name: Purge CDN endpoint
       uses: azure/CLI@v1
