@@ -20,6 +20,14 @@ jobs:
       with:
         inlineScript: |
             az storage blob upload-batch --account-name azresumeacct --auth-mode key -d '$web' -s frontend/ --overwrite
+            
+    - name: Copy function code files
+      uses: Azure/cli@1.0.4
+      with:
+        inlineScript: |
+          az storage file upload --account-name azresumeacct --share-name func-butterresume12c3f1b2408b --source ./backend/Counter/run.ps1 --path "site/wwwroot/Counter" --overwrite
+          az storage file upload --account-name azresumeacct --share-name func-butterresume12c3f1b2408b --source ./backend/Counter/function.json --path "site/wwwroot/Counter" --overwrite
+          
     - name: Purge CDN endpoint
       uses: azure/CLI@v1
       with:
