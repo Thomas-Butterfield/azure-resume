@@ -1,10 +1,10 @@
-name: Update Azure Resume Site Front End Files On Blob Storage
+name: Update Azure Resume Site Backend Files On Blob Storage
 
 on:
     push:
         branches: [ main ]
         paths:
-        - 'frontend/**'
+        - 'backend/**'
 
 jobs:
   build:
@@ -15,11 +15,12 @@ jobs:
       with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Copy Website Front End Files To Blob Storage
-      uses: azure/CLI@v1
+    - name: Copy Azure Function Counter Files To Blob Storage
+      uses: Azure/cli@1.0.4
       with:
         inlineScript: |
-            az storage blob upload-batch --account-name azresumeacct --auth-mode key -d '$web' -s frontend/ --overwrite
+          az storage file upload --account-name azresumeacct --share-name func-butterresume12c3f1b2408b --source ./backend/Counter/run.ps1 --path "site/wwwroot/Counter"
+          az storage file upload --account-name azresumeacct --share-name func-butterresume12c3f1b2408b --source ./backend/Counter/function.json --path "site/wwwroot/Counter"
           
     - name: Purge Azure CDN Endpoint For Azure Resume Site
       uses: azure/CLI@v1
